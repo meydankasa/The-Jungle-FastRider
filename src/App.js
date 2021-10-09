@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import HomePage from "./pages/HomePage";
+import ConfirmOrder from "./pages/ConfirmOrder";
+import { Switch, Route } from "react-router-dom";
+import ProtectedRoute from "./pages/protectedRoute";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+const App = () => {
+    return (
+    <Container>
+      <Switch>
+        <Route exact path={"/"}>
+          <HomePage />
+        </Route>
+        <ProtectedRoute exact path={"/confirm-order"} Component={ConfirmOrder}/>
+      </Switch>
+    </Container>
   );
 }
 
-export default App;
+const Container = styled.div`
+  width: 640px;
+  margin: 0 auto;
+  padding-bottom: 10px;
+  @media (max-width: 720px) {
+   width: 95%;
+   padding-bottom: 30px;
+
+  }
+`;
+  
+ export default App;
